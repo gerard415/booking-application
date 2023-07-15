@@ -1,12 +1,23 @@
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 export const RegisterPage = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            await axios.post('http://localhost:5000/auth/register', {
+                name,
+                email,
+                password
+            })
+        } catch (error) {
+            return error
+        }
         
     }
 
